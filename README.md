@@ -33,11 +33,11 @@ It was originally developed for [http://shopyeti.com](http://shopyeti.com).
 
 ## Next steps
 
-- Provide examples
-- Include documentation into this readme
-- fetching value from DOM, data attribute or options
+- more detailed examples and documentation
+- cleanup code
+- fetching initial value from DOM or data attribute
 - 'silent' integration into DOM (no animation on init)
 - option to update settings after first initialization
 - move animation effect to plugin
-- add more animation effects
+- add alternative animation effects
 - add callback/event interface
