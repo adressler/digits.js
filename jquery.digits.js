@@ -10,7 +10,7 @@
 // single digit
 ;(function($) {
 	var default_options = {
-		chars : ' 1234567890',
+		chars : '0123456789',
 		value : ' ',
 		min : 300,
 		max : 1000,
@@ -42,7 +42,8 @@
 
 				var options = $.extend({}, self.data('digit.options'), opts);
 
-				var charset = ''.split('');
+				var charset = [];
+				options.chars = ' ' + options.chars;
 				$.merge(charset, options.chars.split(''));
 				$.merge(charset, options.chars.split(''));
 
@@ -91,7 +92,7 @@
 (function($) {
 	var default_options = {
 		length: 12,
-		chars: ' 1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ.!',
+		chars: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.!',
 		value: 'HELLO WORLD!',
 		align: 'left',
 		min: 300,
