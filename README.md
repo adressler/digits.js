@@ -33,7 +33,7 @@ It was originally developed for [http://shopyeti.com](http://shopyeti.com).
 
 ## Next steps
 
-- Provide examples.js
+- Provide examples
 - Include documentation into this readme
 - fetching value from DOM, data attribute or options
 - 'silent' integration into DOM (no animation on init)
