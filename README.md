@@ -17,7 +17,7 @@ See examples.html – as soon, as it exists ;)
 
 ## Dependencies
 
-dopamine.js requires jQuery >= 1.7  
+jquery.digits.js requires jQuery >= 1.7  
 Get it from: [http://jquery.com](http://jquery.com)
 
 ## License
