@@ -71,12 +71,16 @@
 			// text within the element or the default text of digits.js ("HELLO WORLD!").
 			// The min/max values are for defining the duration each digit needs to reach the target value,
 			// depending on 'distance' to the char.
+			// With "silentInit: false" (also the default value) the animation will run on init. A value of
+			// true means that there will be no animation at startup. This is useful, if you render the
+			// digits markup into your page and want to plug in the digits effect afterwards.
 			var options = {
 				  length: 20
 				, chars: ' 1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,!?'
 				, align: 'left'
 				, min: 600
 				, max: 1500
+				, silentInit: false
 			};
 			$('.digits').digits(options);
 

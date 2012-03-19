@@ -13,7 +13,8 @@
 		chars : ' 1234567890',
 		value : ' ',
 		min : 300,
-		max : 1000
+		max : 1000,
+		silentInit : false
 	}
 
 	var methods = {
@@ -23,24 +24,24 @@
 			options.value = options.value.toString().substr(0, 1);
 			return this.each(function() {
 				var self = $(this);
-				if (self.data('digit.init')) return;
+				if (self.data('digit.options')) return;
 				self.addClass('digitWrapper');
 				var content = $('<span>').html(options.value);
 				self.append(content);
 				self.data('digit.content', content);
 				self.data('digit.actual', options.value);
 				self.data('digit.options', options);
-				self.data('digit.init', true);
 			});
 		},
-		set: function(value) {
+		set: function(value, opts) {
 			if (value == undefined || value == '') value = ' ';
 			value = value.toString().substr(0, 1);
 
 			return this.each(function() {
 				var self = $(this);
 
-				var options = self.data('digit.options');
+				var options = $.extend({}, self.data('digit.options'), opts);
+
 				var charset = ''.split('');
 				$.merge(charset, options.chars.split(''));
 				$.merge(charset, options.chars.split(''));
@@ -94,7 +95,8 @@
 		value: 'HELLO WORLD!',
 		align: 'left',
 		min: 300,
-		max: 1000
+		max: 1000,
+		silentInit: false
 	}
 	var methods = {
 		init: function(opts) {
@@ -123,11 +125,10 @@
 
 				// save options to element
 				self.data('digits.options', options);
-
-				self.digits('set', value);
+				self.digits('set', value, options.silentInit ? { min: 0, max: 0 } : {});
 			});
 		},
-		set: function(value) {
+		set: function(value, opts) {
 			return this.each(function() {
 				value = value.toString();
 				var self = $(this);
@@ -142,7 +143,7 @@
 
 				var digits = self.children('.digitWrapper');
 				$.each(digits, function(i, digit) {
-					$(digit).digit('set', value.substr(i, 1));
+					$(digit).digit('set', value.substr(i, 1), opts);
 				});
 			});
 		}
