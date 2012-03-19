@@ -8,7 +8,7 @@ digits.js is a fancy animation effect for presenting text and numbers.
 
 ## Installation
 
-Download digits.js and install it in your public javascripts directory.  
+Download jquery.digits.js and install it in your public javascripts directory.  
 Include it in your document AFTER jQuery.
 
 ## Usage

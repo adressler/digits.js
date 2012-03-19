@@ -1,5 +1,5 @@
 /*!
- * digits.js
+ * jquery.digits.js
  * https://github.com/adressler/digits.js
  *
  * Copyright 2012, Armin Dressler
