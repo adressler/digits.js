@@ -13,7 +13,7 @@ Include it in your document AFTER jQuery.
 
 ## Usage
 
-See examples.html – as soon, as it exists ;)
+See examples.html
 
 ## Dependencies
 
