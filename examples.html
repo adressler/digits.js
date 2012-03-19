@@ -74,6 +74,7 @@
 			// With "silentInit: false" (also the default value) the animation will run on init. A value of
 			// true means that there will be no animation at startup. This is useful, if you render the
 			// digits markup into your page and want to plug in the digits effect afterwards.
+			// The 'fallback' parameter allows to set a default character - defaults to ' ' (space).
 			var options = {
 				  length: 20
 				, chars: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,!?'
@@ -81,6 +82,7 @@
 				, min: 600
 				, max: 1500
 				, silentInit: false
+				// , fallback: '_'
 			};
 			$('.digits').digits(options);
 

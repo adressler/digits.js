@@ -14,13 +14,14 @@
 		value : ' ',
 		min : 300,
 		max : 1000,
-		silentInit : false
+		silentInit : false,
+		fallback : ' '
 	}
 
 	var methods = {
 		init: function(opts) {
 			options = $.extend({}, default_options, opts);
-			if (options.value == undefined || options.value == '') options.value = ' ';
+			if (typeof options.value=='undefined' || options.value=='') options.value = options.fallback;
 			options.value = options.value.toString().substr(0, 1);
 			return this.each(function() {
 				var self = $(this);
@@ -34,7 +35,7 @@
 			});
 		},
 		set: function(value, opts) {
-			if (value == undefined || value == '') value = ' ';
+			if (!value) value = '';
 			value = value.toString().substr(0, 1);
 
 			return this.each(function() {
@@ -43,7 +44,7 @@
 				var options = $.extend({}, self.data('digit.options'), opts);
 
 				var charset = [];
-				options.chars = ' ' + options.chars;
+				options.chars = options.fallback + options.chars;
 				$.merge(charset, options.chars.split(''));
 				$.merge(charset, options.chars.split(''));
 
@@ -97,7 +98,8 @@
 		align: 'left',
 		min: 300,
 		max: 1000,
-		silentInit: false
+		silentInit: false,
+		fallback: ' '
 	}
 	var methods = {
 		init: function(opts) {
@@ -121,7 +123,9 @@
 				self.children().digit('init', {
 					chars: options.chars,
 					min: options.min,
-					max: options.max
+					max: options.max,
+					value: options.fallback,
+					fallback: options.fallback
 				});
 
 				// save options to element
@@ -139,7 +143,7 @@
 				var length = value.length;
 				var diff = options.length - length;
 				for (i=1; i<=diff; i++) {
-					value = (options.align=='right') ? ' ' + value : value + ' ';
+					value = (options.align=='right') ? options.fallback + value : value + options.fallback;
 				}
 
 				var digits = self.children('.digitWrapper');
