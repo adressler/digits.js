@@ -12,6 +12,7 @@
 	var default_options = {
 		chars : '0123456789',
 		value : ' ',
+		duration : 3,
 		min : 300,
 		max : 1000,
 		silentInit : false,
@@ -70,8 +71,8 @@
 
 				container.css('margin-top', '-' + offset.toString() + 'px');
 
-				// animation time depending on target distance, but between 300ms and 1000ms
-				container.animate({'margin-top': 0}, Math.min(options.max, Math.max(options.min, offset * 3)));
+				// animation time depending on target distance, but between min and max milliseconds
+				container.animate({'margin-top': 0}, Math.min(options.max, Math.max(options.min, offset * options.duration)));
 
 				self.data('digit.actual', value);
 			});
@@ -96,6 +97,7 @@
 		chars: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.!',
 		value: 'HELLO WORLD!',
 		align: 'left',
+		duration: 3,
 		min: 300,
 		max: 1000,
 		silentInit: false,
@@ -122,6 +124,7 @@
 				}
 				self.children().digit('init', {
 					chars: options.chars,
+					duration: options.duration,
 					min: options.min,
 					max: options.max,
 					value: options.fallback,

@@ -70,7 +70,7 @@
 			// You can also define a value here. Fallback is elements' data-digits-value attribute,
 			// text within the element or the default text of digits.js ("HELLO WORLD!").
 			// The min/max values are for defining the duration each digit needs to reach the target value,
-			// depending on 'distance' to the char.
+			// depending on 'distance' to the character. The duration value is 'milliseconds per pixel'.
 			// With "silentInit: false" (also the default value) the animation will run on init. A value of
 			// true means that there will be no animation at startup. This is useful, if you render the
 			// digits markup into your page and want to plug in the digits effect afterwards.
@@ -79,8 +79,9 @@
 				  length: 24
 				, chars: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,!?'
 				, align: 'left'
+				, duration: 5
 				, min: 600
-				, max: 1500
+				, max: 2000
 				, silentInit: false
 				// , fallback: '_'
 				// , value: 'Hello digits.js!'
