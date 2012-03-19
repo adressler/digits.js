@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!--
+		digits.js - Examples
+		https://github.com/adressler/digits.js
+
+		Copyright 2012, Armin Dressler
+		Licensed under the MIT license.
+		See LICENSE for details.
+	-->
+	<title>dopamine.js – examples</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href='http://fonts.googleapis.com/css?family=Iceberg' rel='stylesheet' type='text/css'>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="jquery.digits.js"></script>
+	<style>
+		body {
+			font-family: Courier, sans-serif;
+			font-size: 12px;
+		}
+		.digitsWrapper {
+			padding: 3px 2px;
+			width: 400px;
+			height: 25px;
+			background: #cedce7; /* Old browsers */
+			background: -moz-linear-gradient(top,  #cedce7 0%, #596a72 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cedce7), color-stop(100%,#596a72)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #cedce7 0%,#596a72 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #cedce7 0%,#596a72 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #cedce7 0%,#596a72 100%); /* IE10+ */
+			background: linear-gradient(top,  #cedce7 0%,#596a72 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cedce7', endColorstr='#596a72',GradientType=0 ); /* IE6-9 */
+		}
+		.digitWrapper {
+			width: 14px;
+			height: 22px;
+			float: left;
+			overflow: hidden;
+			margin: 0 1px;
+			padding: 3px 1px 0 3px;
+			background: #f7f7f7; /* Old browsers */
+			background: -moz-linear-gradient(top,  #f7f7f7 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f7f7f7), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  #f7f7f7 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  #f7f7f7 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  #f7f7f7 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+			background: linear-gradient(top,  #f7f7f7 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7f7f7', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+			box-shadow: 1px 1px 2px #555 inset;
+		}
+		.digitWrapper span {
+			display: block;
+			width: 12px;
+			height: 24px;
+			text-align: center;
+			font-family: 'Iceberg', 'Courier';
+			font-size: 18px;
+			color: #333;
+			line-height: 19px;
+		}
+		input, button {
+			font-size: 15px;
+		}
+	</style>
+	<script type="text/javascript" charset="utf-8">
+		$(function() {
+			
+			// init digits.js with a length of 20 digits, a new charset and a predefined value
+			var options = {
+				length: 20
+				,chars: ' 1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,!?'
+				,value: 'digits.js'
+			};
+			$('.digits').digits(options);
+
+			// update digits value from input box
+			$('form').submit(function() {
+				var value = $('input').val();
+				$('.digits').digits('set', value);
+				return false;
+			});
+		});
+	</script>
+</head>
+<body>
+	<h1>digits.js</h1>
+	<p>Try watching in an CSS3 capable browser for full experience.</p>
+	<br/>
+	<div class="digits"></div>
+	<br/>
+	<br/>
+	<form>
+		<input type="text" length="20" value="Try this, my friend!" />
+		<button id="set">Update digits</button>
+	</form>
+</body>
+</html>
