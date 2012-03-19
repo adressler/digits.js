@@ -37,7 +37,6 @@ It was originally developed for [http://shopyeti.com](http://shopyeti.com).
 - Include documentation into this readme
 - fetching value from DOM, data attribute or options
 - 'silent' integration into DOM (no animation on init)
-- option to left or right align text
 - option for animation speed and min/max values
 - move animation effect to plugin
 - add more animation effects

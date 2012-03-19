@@ -89,7 +89,8 @@
 	var default_options = {
 		length: 12,
 		chars: ' 1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ.!',
-		value: 'HELLO WORLD!'
+		value: 'HELLO WORLD!',
+		align: 'left'
 	}
 	var methods = {
 		init: function(opts) {
@@ -98,7 +99,7 @@
 			var digit = $('<div>');
 			return this.each(function() {
 				var self = $(this);
-				if (self.data('digits.init')) return;
+				if (self.data('digits.options')) return;
 				self.addClass('digitsWrapper');
 				for (i=1; i<=options.length; i++) {
 					self.append(digit.clone());
@@ -106,20 +107,27 @@
 				self.children().digit('init', {
 					chars: options.chars
 				});
-				self.data('digits.length', options.length);
-				self.data('digits.init', true);
+
+				// save options to element
+				self.data('digits.options', options);
+
+				// set predefined value
 				self.digits('set', options.value);
 			});
 		},
 		set: function(value) {
 			return this.each(function() {
-				var self = $(this);
 				value = value.toString();
+				var self = $(this);
+				var options = self.data('digits.options');
+
+				// append or prepend spaces
 				var length = value.length;
-				var diff = self.data('digits.length') - length;
+				var diff = options.length - length;
 				for (i=1; i<=diff; i++) {
-					value = ' ' + value;
+					value = (options.align=='right') ? ' ' + value : value + ' ';
 				}
+
 				var digits = self.children('.digitWrapper');
 				$.each(digits, function(i, digit) {
 					$(digit).digit('set', value.substr(i, 1));
