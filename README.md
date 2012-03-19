@@ -37,6 +37,7 @@ It was originally developed for [http://shopyeti.com](http://shopyeti.com).
 - cleanup code
 - option to use 'shortest distance' to target character (rotating backwards, if neccessary)
 - option to update settings after first initialization
+- add progression effect (starting digit animation one after another)
 - move animation effect to plugin
 - add alternative animation effects
 - add callback/event interface
