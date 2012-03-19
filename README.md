@@ -4,7 +4,8 @@ digits.js is under development. Features and interfaces are likely to change in 
 
 ## Description
 
-digits.js is a fancy animation effect for presenting text and numbers.
+digits.js is a fancy animation effect for presenting text and numbers.  
+The name 'digits' is derived from it's original intention to only animate numbers.
 
 ## Installation
 
