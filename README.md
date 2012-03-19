@@ -35,6 +35,7 @@ It was originally developed for [http://shopyeti.com](http://shopyeti.com).
 
 - more detailed examples and documentation
 - cleanup code
+- option to use 'shortest distance' to target character (rotating backwards, if neccessary)
 - option to update settings after first initialization
 - move animation effect to plugin
 - add alternative animation effects
