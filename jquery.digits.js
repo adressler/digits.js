@@ -103,8 +103,15 @@
 			var digit = $('<div>');
 			return this.each(function() {
 				var self = $(this);
+
+				// get predefined value from: options, data-digits-value attribute, DOM content, default
+				var value = opts.value;
+				if (!value && self.attr('data-digits-value')) value = self.attr('data-digits-value');
+				if (!value && self.text()) value = self.text();
+				if (!value) value = options.value;
+
 				if (self.data('digits.options')) return;
-				self.addClass('digitsWrapper');
+				self.addClass('digitsWrapper').empty();
 				for (i=1; i<=options.length; i++) {
 					self.append(digit.clone());
 				}
@@ -117,8 +124,7 @@
 				// save options to element
 				self.data('digits.options', options);
 
-				// set predefined value
-				self.digits('set', options.value);
+				self.digits('set', value);
 			});
 		},
 		set: function(value) {
