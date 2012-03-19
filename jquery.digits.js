@@ -10,7 +10,7 @@
 // single digit
 ;(function($) {
 	var default_options = {
-		chars : [ ' ', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ],
+		chars : ' 1234567890',
 		value : ' '
 	}
 
@@ -39,9 +39,9 @@
 				var self = $(this);
 
 				var options = self.data('digit.options');
-				var charset = [];
-				$.merge(charset, options.chars);
-				$.merge(charset, options.chars);
+				var charset = ''.split('');
+				$.merge(charset, options.chars.split(''));
+				$.merge(charset, options.chars.split(''));
 
 				var actual = self.data('digit.actual');
 				var start = $.inArray(actual, charset);
@@ -86,21 +86,29 @@
 
 // digits (multiple digit)
 (function($) {
+	var default_options = {
+		length: 12,
+		chars: ' 1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ.!',
+		value: 'HELLO WORLD!'
+	}
 	var methods = {
-		init: function(length) {
-			if (length == undefined) length = 5;
+		init: function(opts) {
+			var options = $.extend({}, default_options, opts);
+
 			var digit = $('<div>');
 			return this.each(function() {
 				var self = $(this);
-				console.log(self);
 				if (self.data('digits.init')) return;
 				self.addClass('digitsWrapper');
-				for (i=1; i<=length; i++) {
+				for (i=1; i<=options.length; i++) {
 					self.append(digit.clone());
 				}
-				self.children().digit('init');
-				self.data('digits.length', length);
+				self.children().digit('init', {
+					chars: options.chars
+				});
+				self.data('digits.length', options.length);
 				self.data('digits.init', true);
+				self.digits('set', options.value);
 			});
 		},
 		set: function(value) {
