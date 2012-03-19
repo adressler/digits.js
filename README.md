@@ -35,7 +35,6 @@ It was originally developed for [http://shopyeti.com](http://shopyeti.com).
 
 - more detailed examples and documentation
 - cleanup code
-- 'silent' integration into DOM (no animation on init)
 - option to update settings after first initialization
 - move animation effect to plugin
 - add alternative animation effects
