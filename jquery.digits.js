@@ -11,12 +11,14 @@
 ;(function($) {
 	var default_options = {
 		chars : ' 1234567890',
-		value : ' '
+		value : ' ',
+		min : 300,
+		max : 1000
 	}
 
 	var methods = {
-		init: function(options) {
-			options = $.extend(default_options, options);
+		init: function(opts) {
+			options = $.extend({}, default_options, opts);
 			if (options.value == undefined || options.value == '') options.value = ' ';
 			options.value = options.value.toString().substr(0, 1);
 			return this.each(function() {
@@ -66,7 +68,7 @@
 				container.css('margin-top', '-' + offset.toString() + 'px');
 
 				// animation time depending on target distance, but between 300ms and 1000ms
-				container.animate({'margin-top': 0}, Math.min(1000, Math.max(300, offset * 3)));
+				container.animate({'margin-top': 0}, Math.min(options.max, Math.max(options.min, offset * 3)));
 
 				self.data('digit.actual', value);
 			});
@@ -90,7 +92,9 @@
 		length: 12,
 		chars: ' 1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ.!',
 		value: 'HELLO WORLD!',
-		align: 'left'
+		align: 'left',
+		min: 300,
+		max: 1000
 	}
 	var methods = {
 		init: function(opts) {
@@ -105,7 +109,9 @@
 					self.append(digit.clone());
 				}
 				self.children().digit('init', {
-					chars: options.chars
+					chars: options.chars,
+					min: options.min,
+					max: options.max
 				});
 
 				// save options to element

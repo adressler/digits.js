@@ -66,12 +66,16 @@
 	<script type="text/javascript" charset="utf-8">
 		$(function() {
 			
-			// init digits.js with a length of 20 digits, a new charset, a predefined value and left aligned
+			// init digits.js with a length of 20 digits, a new charset, a predefined value and left aligned.
+			// the min/max values are for defining the duration each digit needs to reach the target value,
+			// depending on 'distance' to the char.
 			var options = {
-				length: 20
-				,chars: ' 1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,!?'
-				,value: 'digits.js'
-				,align: 'left'
+				  length: 20
+				, chars: ' 1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,!?'
+				, value: 'digits.js'
+				, align: 'left'
+				, min: 600
+				, max: 1500
 			};
 			$('.digits').digits(options);
 
