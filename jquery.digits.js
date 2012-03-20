@@ -117,6 +117,7 @@
 				if (!value && self.attr('data-digits-value')) value = self.attr('data-digits-value');
 				if (!value && self.text()) value = self.text();
 				if (!value) value = options.value;
+				self.removeAttr('data-digits-value');
 
 				if (self.data('digits.options')) return;
 
