@@ -16,8 +16,7 @@
 		min : 300,
 		max : 1000,
 		silentInit : false,
-		fallback : ' ',
-		digitWrapper: 'digitWrapper'
+		fallback : ' '
 	}
 
 	var methods = {
@@ -28,7 +27,6 @@
 			return this.each(function() {
 				var self = $(this);
 				if (self.data('digit.options')) return;
-				self.addClass(options.digitWrapper);
 				var content = $('<span>').html(options.value);
 				self.append(content);
 				self.data('digit.content', content);
@@ -110,7 +108,7 @@
 		init: function(opts) {
 			var options = $.extend({}, default_options, opts);
 
-			var digit = $('<div>');
+			var digit = $('<div>').addClass(options.digitWrapper);
 			return this.each(function() {
 				var self = $(this);
 
@@ -122,18 +120,17 @@
 
 				if (self.data('digits.options')) return;
 
-				self.addClass(options.digitsWrapper).empty();
+				self.addClass(options.digitsWrapper).find('.' + options.digitWrapper).remove();
 				for (i=1; i<=options.length; i++) {
 					self.append(digit.clone());
 				}
-				self.children().digit('init', {
+				self.children('.' + options.digitWrapper).digit('init', {
 					chars: options.chars,
 					duration: options.duration,
 					min: options.min,
 					max: options.max,
 					value: options.fallback,
-					fallback: options.fallback,
-					digitWrapper: options.digitWrapper
+					fallback: options.fallback
 				});
 
 				// save options to element
