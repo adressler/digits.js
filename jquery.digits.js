@@ -16,7 +16,8 @@
 		min : 300,
 		max : 1000,
 		silentInit : false,
-		fallback : ' '
+		fallback : ' ',
+		digitWrapper: 'digitWrapper'
 	}
 
 	var methods = {
@@ -27,7 +28,7 @@
 			return this.each(function() {
 				var self = $(this);
 				if (self.data('digit.options')) return;
-				self.addClass('digitWrapper');
+				self.addClass(options.digitWrapper);
 				var content = $('<span>').html(options.value);
 				self.append(content);
 				self.data('digit.content', content);
@@ -101,7 +102,9 @@
 		min: 300,
 		max: 1000,
 		silentInit: false,
-		fallback: ' '
+		fallback: ' ',
+		digitsWrapper: 'digitsWrapper',
+		digitWrapper: 'digitWrapper',
 	}
 	var methods = {
 		init: function(opts) {
@@ -118,7 +121,8 @@
 				if (!value) value = options.value;
 
 				if (self.data('digits.options')) return;
-				self.addClass('digitsWrapper').empty();
+
+				self.addClass(options.digitsWrapper).empty();
 				for (i=1; i<=options.length; i++) {
 					self.append(digit.clone());
 				}
@@ -128,7 +132,8 @@
 					min: options.min,
 					max: options.max,
 					value: options.fallback,
-					fallback: options.fallback
+					fallback: options.fallback,
+					digitWrapper: options.digitWrapper
 				});
 
 				// save options to element
@@ -149,7 +154,8 @@
 					value = (options.align=='right') ? options.fallback + value : value + options.fallback;
 				}
 
-				var digits = self.children('.digitWrapper');
+				var digits = self.children('.' + options.digitWrapper);
+
 				$.each(digits, function(i, digit) {
 					$(digit).digit('set', value.substr(i, 1), opts);
 				});

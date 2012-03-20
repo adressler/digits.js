@@ -75,6 +75,7 @@
 			// true means that there will be no animation at startup. This is useful, if you render the
 			// digits markup into your page and want to plug in the digits effect afterwards.
 			// The 'fallback' parameter allows to set a default character - defaults to ' ' (space).
+			// With digitsWrapper and digitWrapper you can set class names for wrapping elements.
 			var options = {
 				  length: 24
 				, chars: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,!?'
@@ -85,6 +86,8 @@
 				, silentInit: false
 				// , fallback: '_'
 				// , value: 'Hello digits.js!'
+				// , digitsWrapper: 'digitsWrapper'
+				// , digitWrapper: 'digitWrapper'
 			};
 			$('.digits').digits(options);
 
