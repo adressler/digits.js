@@ -8,72 +8,72 @@
  */
 
 // single digit
-;(function($) {
+;!function($) {
 	var default_options = {
-		chars : '0123456789',
-		value : ' ',
-		duration : 3,
-		min : 300,
-		max : 1000,
-		silentInit : false,
-		fallback : ' '
+		  chars : '0123456789'
+		, value : ' '
+		, duration : 3
+		, min : 300
+		, max : 1000
+		, silentInit : false
+		, fallback : ' '
 	}
 
 	var methods = {
 		init: function(opts) {
 			options = $.extend({}, default_options, opts);
-			if (typeof options.value=='undefined' || options.value=='') options.value = options.fallback;
+
+			if (typeof options.value == 'undefined' || options.value == '') options.value = options.fallback;
+
 			options.value = options.value.toString().substr(0, 1);
+
 			return this.each(function() {
-				var self = $(this);
+				var self = $(this)
+				  , content = $('<span>').html(options.value);
+
 				if (self.data('digit.options')) return;
-				var content = $('<span>').html(options.value);
-				self.append(content);
-				self.data('digit.content', content);
-				self.data('digit.actual', options.value);
-				self.data('digit.options', options);
+
+				self.append(content)
+					.data('digit.content', content)
+					.data('digit.actual', options.value)
+					.data('digit.options', options);
 			});
-		},
-		set: function(value, opts) {
+		}
+
+		, set: function(value, opts) {
 			if (!value) value = '';
 			value = value.toString().substr(0, 1);
 
 			return this.each(function() {
-				var self = $(this);
+				var self = $(this)
+				  , options = $.extend({}, self.data('digit.options'), opts)
+				  , charset = (options.fallback + options.chars + options.fallback + options.chars).split('')
+				  , actual = self.data('digit.actual')
+				  , start = $.inArray(actual, charset)
+				  , target = $.inArray(value, charset)
+				  , container = $('<div>')
+				  , content = ''
+				  , offset = '';
 
-				var options = $.extend({}, self.data('digit.options'), opts);
-
-				var charset = [];
 				options.chars = options.fallback + options.chars;
-				$.merge(charset, options.chars.split(''));
-				$.merge(charset, options.chars.split(''));
-
-				var actual = self.data('digit.actual');
-				var start = $.inArray(actual, charset);
-				var target = $.inArray(value, charset);
 
 				if (start == target) return;
 				if (target == -1) target = 0;
 				if (start > target) target += options.chars.length;
 
-				self.empty();
-				var container = $('<div>');
-				self.append(container);
+				self.empty()
+					.append(container)
+					.data('digit.actual', value)
 
-				var offset = '';
-
-				for (i=target; i>=start; i--) {
+				for (i = target; i >= start; i--) {
 					offset = container.innerHeight();
-					var content = $('<span>').html(charset[i]);
+					content = $('<span>').html(charset[i]);
 					container.append(content);
 				}
 
-				container.css('margin-top', '-' + offset.toString() + 'px');
-
 				// animation time depending on target distance, but between min and max milliseconds
-				container.animate({'margin-top': 0}, Math.min(options.max, Math.max(options.min, offset * options.duration)));
-
-				self.data('digit.actual', value);
+				container.css('margin-top', '-' + offset.toString() + 'px')
+					.animate({ 'margin-top': 0 }, Math.min(options.max, Math.max(options.min, offset * options.duration)));
 			});
 		}
 	}
@@ -81,78 +81,85 @@
 	$.fn.digit = function(method) {
 		if (methods[method]) {
 			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-		} else if (typeof method === 'object' || ! method) {
-			return methods.init.apply( this, arguments );
+		} else if (typeof method === 'object' || !method) {
+			return methods.init.apply(this, arguments);
 		} else {
-			$.error( 'Method ' +  method + ' does not exist on jQuery.digit' );
+			$.error('Method ' +  method + ' does not exist on jQuery.digit');
 	    }
 	};
-})(jQuery);
+}(jQuery);
 
 // digits (multiple digit)
-(function($) {
+;!function($) {
 	var default_options = {
-		length: 12,
-		chars: '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.!',
-		value: 'HELLO WORLD!',
-		align: 'left',
-		duration: 3,
-		min: 300,
-		max: 1000,
-		silentInit: false,
-		fallback: ' ',
-		digitsWrapper: 'digitsWrapper',
-		digitWrapper: 'digitWrapper',
+		  length : 12
+		, chars : '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ.!'
+		, value : 'HELLO WORLD!'
+		, align : 'left'
+		, duration : 3
+		, min : 300
+		, max : 1000
+		, silentInit : false
+		, fallback : ' '
+		, digitsWrapper : 'digitsWrapper'
+		, digitWrapper : 'digitWrapper'
 	}
+
 	var methods = {
 		init: function(opts) {
-			var options = $.extend({}, default_options, opts);
+			var options = $.extend({}, default_options, opts)
+			  , digit = $('<div>').addClass(options.digitWrapper);
 
-			var digit = $('<div>').addClass(options.digitWrapper);
 			return this.each(function() {
-				var self = $(this);
-
-				// get predefined value from: options, data-digits-value attribute, DOM content, default
-				var value = opts.value;
-				if (!value && self.attr('data-digits-value')) value = self.attr('data-digits-value');
-				if (!value && self.text()) value = self.text();
-				if (!value) value = options.value;
-				self.removeAttr('data-digits-value');
+				var self = $(this)
+				  , value = opts.value
+				  , el = $('<div>');
 
 				if (self.data('digits.options')) return;
 
-				self.addClass(options.digitsWrapper).find('.' + options.digitWrapper).remove();
-				for (i=1; i<=options.length; i++) {
-					self.append(digit.clone());
-				}
-				self.children('.' + options.digitWrapper).digit('init', {
-					chars: options.chars,
-					duration: options.duration,
-					min: options.min,
-					max: options.max,
-					value: options.fallback,
-					fallback: options.fallback
-				});
+				// get predefined value from: options, data-digits-value attribute, DOM content, default
+				if (!value && self.attr('data-digits-value')) value = self.attr('data-digits-value');
+				if (!value && self.text()) value = self.text();
+				if (!value) value = options.value;
 
-				// save options to element
-				self.data('digits.options', options);
-				self.digits('set', value, options.silentInit ? { min: 0, max: 0 } : {});
+				for (i = 1; i <= options.length; i++) {
+					el.append(digit.clone());
+				}
+
+				self.removeAttr('data-digits-value')
+					.addClass(options.digitsWrapper)
+					.find('.' + options.digitWrapper)
+						.remove()
+						.end()
+					.data('digits.options', options)
+					.append(el.children())
+					.children('.' + options.digitWrapper)
+						.digit('init', {
+							  chars: options.chars
+							, duration: options.duration
+							, min: options.min
+							, max: options.max
+							, value: options.fallback
+							, fallback: options.fallback
+						})
+						.end()
+					.digits('set', value, options.silentInit ? { min: 0, max: 0 } : {});
 			});
-		},
-		set: function(value, opts) {
+		}
+
+		, set: function(value, opts) {
+			var length = (value = value.toString()).length;
+
 			return this.each(function() {
-				value = value.toString();
-				var self = $(this);
-				var options = self.data('digits.options');
+				var self = $(this)
+				  , options = self.data('digits.options')
+				  , diff = options.length - length
+				  , digits = self.children('.' + options.digitWrapper);
 
 				// append or prepend spaces
-				var length = value.length;
-				var diff = options.length - length;
-				for (i=1; i<=diff; i++) {
-					value = (options.align=='right') ? options.fallback + value : value + options.fallback;
+				for (i = 1; i <= diff; i++) {
+					value = (options.align == 'right') ? options.fallback + value : value + options.fallback;
 				}
-
-				var digits = self.children('.' + options.digitWrapper);
 
 				$.each(digits, function(i, digit) {
 					$(digit).digit('set', value.substr(i, 1), opts);
@@ -164,10 +171,10 @@
 	$.fn.digits = function(method) {
 		if (methods[method]) {
 			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-		} else if (typeof method === 'object' || ! method) {
-			return methods.init.apply( this, arguments );
+		} else if (typeof method === 'object' || !method) {
+			return methods.init.apply(this, arguments);
 		} else {
-			$.error( 'Method ' +  method + ' does not exist on jQuery.digits' );
+			$.error('Method ' +  method + ' does not exist on jQuery.digits');
 	    }
 	};
-})(jQuery);
+}(jQuery);
