@@ -34,9 +34,11 @@
 				if (self.data('digit.options')) return;
 
 				self.append(content)
-					.data('digit.content', content)
-					.data('digit.actual', options.value)
-					.data('digit.options', options);
+					.data({
+						  'digit.content': content
+						, 'digit.actual': options.value
+						, 'digit.options': options
+					});
 			});
 		}
 
