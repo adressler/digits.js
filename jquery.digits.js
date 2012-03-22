@@ -13,6 +13,7 @@
 		  chars : '0123456789'
 		, value : ' '
 		, duration : 3
+		, delay : 0
 		, min : 300
 		, max : 1000
 		, silentInit : false
@@ -73,6 +74,7 @@
 
 				// animation time depending on target distance, but between min and max milliseconds
 				container.css('margin-top', '-' + offset.toString() + 'px')
+					.delay(options.delay)
 					.animate({ 'margin-top': 0 }, Math.min(options.max, Math.max(options.min, offset * options.duration)));
 			});
 		}
@@ -97,6 +99,7 @@
 		, value : 'HELLO WORLD!'
 		, align : 'left'
 		, duration : 3
+		, progress : 25
 		, min : 300
 		, max : 1000
 		, silentInit : false
@@ -166,7 +169,7 @@
 				}
 
 				$.each(digits, function(i, digit) {
-					$(digit).digit('set', value.substr(i, 1), opts);
+					$(digit).digit('set', value.substr(i, 1), $.extend(opts, { delay: i * options.progress }));
 				});
 			});
 		}
