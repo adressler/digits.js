@@ -57,11 +57,9 @@
 				  , content = ''
 				  , offset = '';
 
-				options.chars = options.fallback + options.chars;
-
 				if (start == target) return;
 				if (target == -1) target = 0;
-				if (start > target) target += options.chars.length;
+				if (start > target) target += options.chars.length + 1;
 
 				self.empty()
 					.append(container)
