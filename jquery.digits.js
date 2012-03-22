@@ -169,7 +169,9 @@
 				}
 
 				$.each(digits, function(i, digit) {
-					$(digit).digit('set', value.substr(i, 1), $.extend(opts, { delay: i * options.progress }));
+					$(digit).digit('set', value.substr(i, 1), $.extend(opts, {
+						delay : ((options.align == 'right') ? (length + 1 - i) : i) * options.progress
+					}));
 				});
 			});
 		}
