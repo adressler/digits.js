@@ -40,3 +40,4 @@ It was originally developed for [http://shopyeti.com](http://shopyeti.com).
 - move animation effect to plugin
 - add alternative animation effects
 - add callback/event interface
+- add CSS3 transition support for animation
