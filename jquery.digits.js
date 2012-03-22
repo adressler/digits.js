@@ -62,15 +62,16 @@
 				if (target == -1) target = 0;
 				if (start > target) target += options.chars.length + 1;
 
+				for (i = target; i >= start; i--) {
+					content += '<span>' + charset[i] + '</span>';
+				}
+
+				container.append(content);
 				self.empty()
 					.append(container)
-					.data('digit.actual', value)
+					.data('digit.actual', value);
 
-				for (i = target; i >= start; i--) {
-					offset = container.innerHeight();
-					content = $('<span>', { html: charset[i] });
-					container.append(content);
-				}
+				offset = container.innerHeight() / (target - start + 1) * (target - start);
 
 				// animation time depending on target distance, but between min and max milliseconds
 				container.css('margin-top', '-' + offset.toString() + 'px')
