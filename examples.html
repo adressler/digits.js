@@ -76,7 +76,7 @@
 			// digits markup into your page and want to plug in the digits effect afterwards.
 			// The 'fallback' parameter allows to set a default character - defaults to ' ' (space).
 			// With digitsWrapper and digitWrapper you can set class names for wrapping elements.
-			var options = {
+			window.digits_conf = {
 				  length: 24
 				, chars: '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,!?'
 				, align: 'left'
@@ -89,7 +89,8 @@
 				// , digitsWrapper: 'digitsWrapper'
 				// , digitWrapper: 'digitWrapper'
 			};
-			$('.digits').digits(options);
+
+			$('.digits').digits(); // you could also include options here: $('.digits').digits({ ... })
 
 			// update digits value from input box
 			$('form').submit(function() {

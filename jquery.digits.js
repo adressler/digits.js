@@ -109,8 +109,10 @@
 
 	var methods = {
 		init: function(opts) {
-			var options = $.extend({}, default_options, opts)
 			opts = opts || {};
+
+			var global_conf = window.digits_conf || {}
+			  , options = $.extend({}, default_options, global_conf, opts)
 			  , digit = $('<div>', { class: options.digitWrapper });
 
 			return this.each(function() {
