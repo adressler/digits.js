@@ -21,11 +21,10 @@
 
 	var methods = {
 		init: function(opts) {
-			options = $.extend({}, default_options, opts);
-
-			if (typeof options.value == 'undefined' || options.value == '') options.value = options.fallback;
-
-			options.value = options.value.toString().substr(0, 1);
+			var options = $.extend({}, default_options, opts);
+			options.value = ((typeof options.value == 'undefined' || options.value == '') ? options.fallback : options.value)
+				.toString()
+				.substr(0, 1);
 
 			return this.each(function() {
 				var self = $(this)
