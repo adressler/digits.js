@@ -29,7 +29,7 @@
 
 			return this.each(function() {
 				var self = $(this)
-				  , content = $('<span>').html(options.value);
+				  , content = $('<span>', { html: options.value });
 
 				if (self.data('digit.options')) return;
 
@@ -67,7 +67,7 @@
 
 				for (i = target; i >= start; i--) {
 					offset = container.innerHeight();
-					content = $('<span>').html(charset[i]);
+					content = $('<span>', { html: charset[i] });
 					container.append(content);
 				}
 
@@ -108,7 +108,7 @@
 	var methods = {
 		init: function(opts) {
 			var options = $.extend({}, default_options, opts)
-			  , digit = $('<div>').addClass(options.digitWrapper);
+			  , digit = $('<div>', { class: options.digitWrapper });
 
 			return this.each(function() {
 				var self = $(this)
