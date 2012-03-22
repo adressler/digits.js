@@ -110,6 +110,7 @@
 	var methods = {
 		init: function(opts) {
 			var options = $.extend({}, default_options, opts)
+			opts = opts || {};
 			  , digit = $('<div>', { class: options.digitWrapper });
 
 			return this.each(function() {
