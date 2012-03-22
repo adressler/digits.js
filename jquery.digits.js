@@ -42,8 +42,9 @@
 		}
 
 		, set: function(value, opts) {
-			if (!value) value = '';
-			value = value.toString().substr(0, 1);
+			value = (!value ? '' : value)
+				.toString()
+				.substr(0, 1);
 
 			return this.each(function() {
 				var self = $(this)
@@ -150,6 +151,7 @@
 		}
 
 		, set: function(value, opts) {
+			value = (!value ? '' : value);
 			var length = (value = value.toString()).length;
 
 			return this.each(function() {
