@@ -54,9 +54,9 @@
 				  , actual = self.data('digit.actual')
 				  , start = $.inArray(actual, charset)
 				  , target = $.inArray(value, charset)
-				  , container = $('<div>')
+				  , container = ''
 				  , content = ''
-				  , offset = '';
+				  , offset = 0;
 
 				if (start == target) return;
 				if (target == -1) target = 0;
@@ -66,7 +66,7 @@
 					content += '<span>' + charset[i] + '</span>';
 				}
 
-				container.append(content);
+				container = $('<div>' + content + '</div>');
 				self.empty()
 					.append(container)
 					.data('digit.actual', value);
